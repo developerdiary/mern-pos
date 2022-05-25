@@ -3,3 +3,8 @@
 body {
   font-family: "Sora", sans-serif;
 }
+
+.item-button button{
+  margin-top: 20px;
+  width: 200px;
+}

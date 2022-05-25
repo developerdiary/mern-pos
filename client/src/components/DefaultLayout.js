@@ -6,15 +6,22 @@ import {
   HomeOutlined,
   BookOutlined,
   UnorderedListOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../styles/DefaultLayout.css";
 const { Header, Sider, Content } = Layout;
 
 const DefaultLayout = ({ children }) => {
+  const { cartItems } = useSelector((state) => state.rootReducer);
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <Layout>
@@ -85,6 +92,10 @@ const DefaultLayout = ({ children }) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          <div className="cart-item">
+            <p>{cartItems.length}</p>
+            <ShoppingCartOutlined />
+          </div>
         </Header>
         <Content
           className="site-layout-background"
