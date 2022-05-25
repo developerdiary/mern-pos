@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import "../styles/DefaultLayout.css";
 const { Header, Sider, Content } = Layout;
 
-const DefaultLayout = (props) => {
+const DefaultLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -94,7 +94,7 @@ const DefaultLayout = (props) => {
             minHeight: 280,
           }}
         >
-          {props.children}
+          {children}
         </Content>
       </Layout>
     </Layout>
