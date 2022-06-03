@@ -8,15 +8,16 @@ import {
   UnorderedListOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Spin } from "antd";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/DefaultLayout.css";
 const { Header, Sider, Content } = Layout;
 
 const DefaultLayout = ({ children }) => {
-  const { cartItems } = useSelector((state) => state.rootReducer);
+  const navigate = useNavigate();
+  const { cartItems, loading } = useSelector((state) => state.rootReducer);
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const DefaultLayout = ({ children }) => {
 
   return (
     <Layout>
+      {loading && <Spin className="spinner" />}
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
           <h1 className="text-center text-light">DD POS</h1>
@@ -92,7 +94,7 @@ const DefaultLayout = ({ children }) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
-          <div className="cart-item">
+          <div className="cart-item" onClick={() => navigate("/cart")}>
             <p>{cartItems.length}</p>
             <ShoppingCartOutlined />
           </div>
