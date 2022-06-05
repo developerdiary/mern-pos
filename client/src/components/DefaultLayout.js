@@ -60,7 +60,17 @@ const DefaultLayout = ({ children }) => {
             {
               key: "/logout",
               icon: <LogoutOutlined />,
-              label: "Logout",
+              label: (
+                <a
+                  href="javascript:void(0)"
+                  onClick={() => {
+                    localStorage.removeItem("auth");
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </a>
+              ),
             },
           ]}
         />
